@@ -1,11 +1,9 @@
 (function () {
-  // 🌊 Auto-skip Threshold if already on Google
   if (location.hostname.includes("google")) {
     runAqua();
     return;
   }
 
-  // 🌀 Threshold Prompt
   const threshold = document.createElement("div");
   threshold.style = `
     position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%);
@@ -37,7 +35,6 @@
     runAqua();
   };
 
-  // 🌊 Aqua Core Logic
   function runAqua() {
     const label = document.createElement("div");
     label.textContent = "Aqua Interface — Sovereign Pulse";
@@ -153,38 +150,98 @@
     }
 
     const trays = [
-      { id: "disk", label: "💾 disk", color: "#00eaff", posLeft: 100, posTop: 100 },
-      { id: "labs", label: "🧪 labs", color: "#00c8ff", posLeft: 100, posTop: 550 },
-      { id: "clickr", label: "🎮 clickr", color: "#00ffff", posLeft: 750, posTop: 100 },
-      { id: "console", label: "🧠 console", color: "#00ffcc", posLeft: 1400, posTop: 100 },
-      { id: "logs", label: "📜 logs", color: "#00ffaa", posLeft: 1400, posTop: 550 },
-      { id: "codes", label: "🔐 codes", color: "#00f4f4", posLeft: 750, posTop: 550 },
-      { id: "dread", label: "🖤 dread", color: "#00aaff", posLeft: 2100, posTop: 100 },
-      { id: "core", label: "🧿 core", color: "#00ffaa", posLeft: 2100, posTop: 1000 },
-      { id: "credits", label: "🎖️ credits", color: "#00ccff", posLeft: 100, posTop: 1000 }
+      {
+        id: "disk",
+        label: "💾 disk",
+        color: "#00eaff",
+        fileURL: "https://raw.githubusercontent.com/mixishere/Aqua/main/Disk",
+        posLeft: 100,
+        posTop: 100
+      },
+      {
+        id: "labs",
+        label: "🧪 labs",
+        color: "#00c8ff",
+        fileURL: "https://raw.githubusercontent.com/mixishere/Aqua/main/Labs",
+        posLeft: 100,
+        posTop: 550
+      },
+      {
+        id: "clickr",
+        label: "🎮 clickr",
+        color: "#00ffff",
+        fileURL: "https://raw.githubusercontent.com/mixishere/Aqua/main/Clickr",
+        posLeft: 750,
+        posTop: 100
+      },
+      {
+        id: "console",
+        label: "🧠 console",
+        color: "#00ffcc",
+        fileURL: "https://raw.githubusercontent.com/mixishere/Aqua/main/Console",
+        posLeft: 1400,
+        posTop: 100
+      },
+      {
+        id: "logs",
+        label: "📜 logs",
+        color: "#00ffaa",
+        fileURL: "https://raw.githubusercontent.com/mixishere/Aqua/main/Logs",
+        posLeft: 1400,
+        posTop: 550
+      },
+      {
+        id: "codes",
+        label: "🔐 codes",
+        color: "#00f4f4",
+        fileURL: "https://raw.githubusercontent.com/mixishere/Aqua/main/Codes",
+        posLeft: 750,
+        posTop: 550
+      },
+      {
+        id: "dread",
+        label: "🖤 dread",
+        color: "#00aaff",
+        fileURL: "https://raw.githubusercontent.com/mixishere/Aqua/main/Dread",
+        posLeft: 2100,
+        posTop: 100
+      },
+      {
+        id: "core",
+        label: "🧿 core",
+        color: "#00ffaa",
+        fileURL: "https://raw.githubusercontent.com/mixishere/Aqua/main/Core",
+        posLeft: 2100,
+        posTop: 1000
+      },
+      {
+        id: "credits",
+        label: "🎖️ credits",
+        color: "#00ccff",
+        fileURL: "https://raw.githubusercontent.com/mixishere/Aqua/main/Credits",
+        posLeft: 100,
+        posTop: 1000
+      }
     ];
-    trays.forEach(tray => {
-      tray.fileURL = `https://raw.githubusercontent.com/mixishere/The-Mix-Archive/main/${tray.id}`;
-      createAquaTray(tray);
-    });
+    trays.forEach(createAquaTray);
 
     window.addEventListener("keydown", (e) => {
       if (e.key === "\\") {
         const viewers = document.querySelectorAll("[id$='GUI']");
         const trayBar = document.getElementById("aquaTrays");
         viewers.forEach(view => {
-          view.style.display = (view.style.display === "none") ? "block" : "none";
-        });
-        if (trayBar) {
-          trayBar.style.display = (trayBar.style.display === "none") ? "block" : "none";
-        }
-        const logs = document.getElementById("logsGUI");
-        if (logs) {
-          const timestamp = new Date().toISOString();
-          logs.textContent += `[${timestamp}] 🌫 Stealth mode toggled (trays + viewers)\n`;
-          logs.scrollTop = logs.scrollHeight;
-        }
+                  view.style.display = (view.style.display === "none") ? "block" : "none";
+      });
+      if (trayBar) {
+        trayBar.style.display = (trayBar.style.display === "none") ? "block" : "none";
       }
-    });
-  }
+      const logs = document.getElementById("logsGUI");
+      if (logs) {
+        const timestamp = new Date().toISOString();
+        logs.textContent += `[${timestamp}] 🌫 Stealth mode toggled (trays + viewers)\n`;
+        logs.scrollTop = logs.scrollHeight;
+      }
+    }
+  });
+}
 })();
