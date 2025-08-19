@@ -1,0 +1,143 @@
+// Project Aurora: Labs Module
+// Status: Experimental
+// Architect: Mix
+
+(function () {
+    console.log("🧪 Labs Module Activated");
+
+    // Glitch logs
+    const experiments = [
+        "Glitch protocol initialized...",
+        "Signal distortion at 0.42Hz",
+        "Unstable tab detected: dread",
+        "Console echo loop: [REDACTED]",
+        "Mix Archive anomaly logged: July 22"
+    ];
+    experiments.forEach((log, i) => {
+        setTimeout(() => {
+            console.log(`[Labs] ${log}`);
+        }, i * 1000);
+    });
+
+    // Sandbox prototype
+    const sandbox = {
+        prototype: "clickr-v2",
+        status: "unstable",
+        notes: "Requires memory patching"
+    };
+    console.log(`[Labs] Sandbox loaded: ${JSON.stringify(sandbox, null, 2)}`);
+
+    // 🧪 Glitch Mode Toggle
+    const glitchBtn = document.createElement("button");
+    glitchBtn.textContent = "Activate Glitch Mode";
+    glitchBtn.style = "margin-top: 10px; background:#cc66ff; color:#000; font-family: monospace;";
+    glitchBtn.onclick = () => {
+        document.body.style.background = "url('https://media.giphy.com/media/l0MYt5jPR6QX5pnqM/giphy.gif')";
+    };
+    document.getElementById("labsGUI")?.appendChild(glitchBtn);
+
+    // 📦 Prototype Viewer
+    const proto = document.createElement("pre");
+    proto.textContent = "📦 Prototype: clickr-v2\nStatus: unstable\nMemory patching required.";
+    proto.style = "margin-top: 20px; color: #cc66ff; font-family: monospace;";
+    document.getElementById("labsGUI")?.appendChild(proto);
+
+    // 🖥️ Reactive Console Panel
+    const input = document.createElement("input");
+    input.placeholder = "Type command...";
+    input.style = "margin-top: 20px; width: 100%; font-family: monospace;";
+    input.onkeydown = (e) => {
+        if (e.key === "Enter") {
+            const val = input.value.trim();
+            input.value = "";
+            console.log(`🧪 [Labs Console] Command received: ${val}`);
+            logEvent(`lab:${val} activated`);
+
+            // Scan /codes if available
+            if (typeof scanCodesForMatch === "function") {
+                scanCodesForMatch(val);
+            }
+
+            // Check local vault
+            if (window.labsVault?.[val]) {
+                logEvent(`labs vault matched: ${val}`);
+            }
+
+            // Visual feedback
+            const viewer = document.getElementById("labsGUI");
+            const echo = document.createElement("div");
+            echo.textContent = `🧬 Activated: ${val}`;
+            echo.style = `
+                margin-top: 10px; padding: 6px;
+                background: #cc66ff22; color: #fff;
+                font-family: monospace; font-size: 13px;
+                border-left: 4px solid #cc66ff;
+            `;
+            viewer?.appendChild(echo);
+        }
+    };
+    document.getElementById("labsGUI")?.appendChild(input);
+
+    // 🧬 Mutation Button
+    const mutateBtn = document.createElement("button");
+    mutateBtn.textContent = "Run Mutation";
+    mutateBtn.style = "margin-top: 10px; background:#ff4444; color:#fff; font-family: monospace;";
+    mutateBtn.onclick = () => {
+        document.querySelectorAll("button").forEach(btn => {
+            btn.style.background = "#000";
+            btn.style.color = "#ff4444";
+        });
+    };
+    document.getElementById("labsGUI")?.appendChild(mutateBtn);
+
+    // 🌌 Midnight Lore Echo
+    const now = new Date();
+    if (now.getHours() === 0) {
+        console.log("🌌 [Labs] Midnight echo detected...\nThe archive remembers what Mix forgot.");
+    }
+
+    // 💾 Lore Trigger: Press 5
+    window.addEventListener("keydown", (e) => {
+        if (e.key === "5") {
+            console.log("💾 [Labs] Signal echo detected...\nTab 5 was never meant to launch.");
+        }
+    });
+
+    // 🧠 Lore Trigger: Type 0802
+    window.addEventListener("keydown", (e) => {
+        if (e.key === "0") {
+            window._mixCode = "0";
+        } else if (window._mixCode === "0" && e.key === "8") {
+            window._mixCode += "8";
+        } else if (window._mixCode === "08" && e.key === "0") {
+            window._mixCode += "0";
+        } else if (window._mixCode === "080" && e.key === "2") {
+            console.log("🧬 [Labs] Archive breach detected...\nCode 0802 matches origin timestamp.\nMix was here before the tabs.");
+            window._mixCode = "";
+        } else {
+            window._mixCode = "";
+        }
+    });
+
+    // 🧪 Glitch Tag Detection
+    const glitchTags = [
+        "lab:echo-core", "lab:glitch-seed", "lab:syntax-ghost", "lab:delta-swap",
+        "lab:observer-mode", "lab:drift-logic", "lab:trigger-0802",
+        "lab:note-fracture", "lab:core-sample", "lab:mutation-log"
+    ];
+    const viewer = document.getElementById("labsGUI");
+    const content = viewer?.textContent || "";
+    glitchTags.forEach(tag => {
+        if (content.includes(tag)) {
+            const glitch = document.createElement("div");
+            glitch.textContent = `🧬 Glitch Activated: ${tag}`;
+            glitch.style = `
+                margin-top: 10px; padding: 6px;
+                background: #cc66ff22; color: #fff;
+                font-family: monospace; font-size: 13px;
+                border-left: 4px solid #cc66ff;
+            `;
+            viewer.appendChild(glitch);
+        }
+    });
+})();
