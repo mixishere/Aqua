@@ -1,0 +1,58 @@
+// Project Aqua: Console Tray  
+// Status: Reactive | Architect: Mix
+
+(() => {
+    const viewer = document.getElementById("consoleGUI");
+    if (!viewer) return;
+
+    // 🖥️ Input Field
+    const input = document.createElement("input");
+    input.placeholder = "Type command: run:, sig:, key:...";
+    input.style = `
+        width: 90%; padding: 10px; margin-top: 10px;
+        background: #001f2f; color: #00ffcc;
+        border: 2px solid #00ffcc; font-family: monospace;
+        font-size: 14px; border-radius: 8px;
+    `;
+    viewer.appendChild(input);
+    input.focus();
+
+    // 🧠 Command Processor
+    input.addEventListener("keydown", (e) => {
+        if (e.key === "Enter") {
+            const val = input.value.trim();
+            input.value = "";
+
+            console.log(`🧠 [Aqua Console] Received: ${val}`);
+            logRipple(`console received: ${val}`);
+
+            if (val.startsWith("run:")) {
+                const glitch = val.slice(4);
+                logRipple(`tray:${glitch} activated`);
+                if (typeof scanCodesForMatch === "function") scanCodesForMatch(glitch);
+            } else if (val.startsWith("sig:")) {
+                const sig = val.slice(4);
+                logRipple(`signal received: ${sig}`);
+            } else if (val.startsWith("key:")) {
+                const key = val.slice(4);
+                logRipple(`key breach triggered: ${key}`);
+            } else {
+                logRipple(`unrecognized command: ${val}`);
+            }
+
+            // 🌊 Visual Feedback
+            const echo = document.createElement("div");
+            echo.textContent = `🧬 Activated: ${val}`;
+            echo.style = `
+                margin-top: 10px; padding: 6px;
+                background: #00ffcc22; color: #fff;
+                font-family: monospace; font-size: 13px;
+                border-left: 4px solid #00ffcc;
+            `;
+            viewer.appendChild(echo);
+        }
+    });
+
+    // 🌊 Console Initialized
+    viewer.textContent = "🧠 Aqua Console ready — type a command to ripple the archive.\n";
+})();
